@@ -57,6 +57,22 @@ Use the same `EXPORT_SECRET` you set in step 4. The file name looks like `submis
 - **Landing page (LogiKal brochure):** `src/components/logikal/LogikalBrochure.tsx` — sections and copy. Styles: `src/app/logikal-brochure.css` (colours, spacing, `var(--navy)`, `var(--green)`, etc.). Form layout: `src/components/logikal/LogikalRequestForm.tsx`.
 - **Fields & labels:** `src/config/form.config.ts` — add/remove `formFields`; each `id` is a name attribute and a column in Excel.
 
+### Form submit returns “Redis is not configured” (503)
+
+The app **must** talk to **Upstash Redis** to store submissions. Until these env vars are set, `POST /api/submit` cannot work.
+
+**Local (`npm run dev`):**
+
+1. [Upstash console](https://console.upstash.com/) → **Redis** → **Create database** (free tier is fine).
+2. Open the DB → **REST API** → copy **`UPSTASH_REDIS_REST_URL`** and **`UPSTASH_REDIS_REST_TOKEN`**.
+3. In the project root, create **`.env.local`** (see **`.env.example`**) with both values. Optional: set **`EXPORT_SECRET`** for testing export.
+4. Restart the dev server (env is only read at startup).
+
+**Vercel:**
+
+1. **Project → Settings → Environment Variables** — add the same two variables (or use **Storage → Upstash Redis → Connect** so Vercel fills them).
+2. **Redeploy** so the new vars are available to the runtime.
+
 ## Local `.env` (optional but useful before deploy)
 
 Copy `.env.example` to `.env.local` and set `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN`, and `EXPORT_SECRET` (get REST URL/token from the [Upstash console](https://console.upstash.com/) or after you connect Upstash to your Vercel project and copy from the dashboard). Then `npm run dev` and test the form locally.

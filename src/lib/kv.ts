@@ -25,7 +25,7 @@ export async function appendSubmission(
   const redis = getRedis();
   if (!redis) {
     throw new Error(
-      "Redis is not configured. Add Upstash via Vercel Marketplace and set UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN (or KV_REST_API_URL and KV_REST_API_TOKEN)."
+      "Redis is not configured. Add UPSTASH_REDIS_REST_URL and UPSTASH_REDIS_REST_TOKEN: locally copy them into .env.local from https://console.upstash.com/ (Redis → your database → REST API). On Vercel: Project → Environment Variables, or connect Upstash in Storage / Marketplace, then redeploy."
     );
   }
   const row: StoredSubmission = {
