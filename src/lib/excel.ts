@@ -19,7 +19,7 @@ function cellDisplayValue(fieldId: string, raw: string | undefined) {
 
 export async function buildSubmissionsWorkbook(
   rows: StoredSubmission[]
-): Promise<Buffer> {
+): Promise<Uint8Array> {
   const wb = new ExcelJS.Workbook();
   wb.creator = "vercel-form-excel";
   wb.created = new Date();
@@ -49,6 +49,8 @@ export async function buildSubmissionsWorkbook(
     sheet.getColumn(1).numFmt = "yyyy-mm-dd hh:mm";
   }
 
-  const buffer = (await wb.xlsx.writeBuffer()) as Buffer;
-  return buffer;
+  const raw = await wb.xlsx.writeBuffer();
+  if (raw instanceof Uint8Array) return new Uint8Array(raw);
+  if (raw instanceof ArrayBuffer) return new Uint8Array(raw);
+  return Uint8Array.from(raw as ArrayLike<number>);
 }

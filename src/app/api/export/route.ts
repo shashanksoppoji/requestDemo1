@@ -1,7 +1,8 @@
+import { Buffer } from "node:buffer";
 import { NextResponse } from "next/server";
-import { listSubmissions } from "@/lib/kv";
-import { buildSubmissionsWorkbook } from "@/lib/excel";
 import { timingSafeEqual } from "node:crypto";
+import { buildSubmissionsWorkbook } from "@/lib/excel";
+import { listSubmissions } from "@/lib/kv";
 
 export const runtime = "nodejs";
 
@@ -23,12 +24,14 @@ export async function GET(request: Request) {
   const rows = await listSubmissions();
   const xlsx = await buildSubmissionsWorkbook(rows);
   const filename = `submissions-${new Date().toISOString().slice(0, 10)}.xlsx`;
+  const contentType =
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-  return new NextResponse(new Uint8Array(xlsx), {
+  const body = new Blob([Buffer.from(xlsx)], { type: contentType });
+  return new NextResponse(body, {
     status: 200,
     headers: {
-      "Content-Type":
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      "Content-Type": contentType,
       "Content-Disposition": `attachment; filename="${filename}"`,
       "Cache-Control": "no-store",
     },
