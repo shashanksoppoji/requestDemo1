@@ -2,7 +2,7 @@ import { Buffer } from "node:buffer";
 import { NextResponse } from "next/server";
 import { timingSafeEqual } from "node:crypto";
 import { buildSubmissionsWorkbook } from "@/lib/excel";
-import { listSubmissions } from "@/lib/kv";
+import { listSubmissions } from "@/lib/supabase-db";
 
 export const runtime = "nodejs";
 

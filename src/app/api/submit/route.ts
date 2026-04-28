@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { formFields, formValuesSchema } from "@/config/form.config";
-import { appendSubmission } from "@/lib/kv";
+import { insertSubmission } from "@/lib/supabase-db";
 
 export const runtime = "nodejs";
 
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    await appendSubmission(data);
+    await insertSubmission(data);
   } catch (e) {
     const message = e instanceof Error ? e.message : "Server error";
     return NextResponse.json({ ok: false, error: message }, { status: 503 });
