@@ -67,6 +67,12 @@ Copy `.env.example` to `.env.local` and set `UPSTASH_REDIS_REST_URL`, `UPSTASH_R
 - `timingSafeEqual` for token comparison.
 - No submission data in client-side state after success; export is server-only.
 
+## Vercel build failed at “Linting and checking…”
+
+Production builds **skip ESLint blocking** (`eslint.ignoreDuringBuilds` in `next.config.ts`) so deploys succeed; run **`npm run lint`** locally and fix issues when time allows.
+
+If it still fails, open the deployment on Vercel → **Building** → expand the step after “Linting” — the exact **TypeScript** or **missing env** message is usually there.
+
 ## Optional hardening (later)
 
 - Move export behind login (e.g. Vercel Auth, Clerk) instead of a query token.
