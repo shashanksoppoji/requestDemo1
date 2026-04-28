@@ -26,19 +26,37 @@ function getServiceClient() {
 }
 
 type Row = {
-  id: string;
+  id: number;
   created_at: string;
-  answers: Record<string, unknown> | null;
+  first_name: string | null;
+  last_name: string | null;
+  email: string | null;
+  company: string | null;
+  job_title: string | null;
+  phone: string | null;
+  interest: string | null;
+  message: string | null;
 };
 
 export async function insertSubmission(
   answers: Record<string, string>
 ): Promise<StoredSubmission> {
   const supabase = getServiceClient();
+  const rowToInsert = {
+    first_name: answers.firstName ?? "",
+    last_name: answers.lastName ?? "",
+    email: answers.email ?? "",
+    company: answers.company ?? "",
+    job_title: answers.jobTitle ?? "",
+    phone: answers.phone ?? "",
+    interest: answers.interest ?? "",
+    message: answers.message ?? "",
+  };
+
   const { data, error } = await supabase
     .from(TABLE)
-    .insert({ answers })
-    .select("id, created_at, answers")
+    .insert(rowToInsert)
+    .select("id, created_at, first_name, last_name, email, company, job_title, phone, interest, message")
     .single();
 
   if (error) {
@@ -49,19 +67,21 @@ export async function insertSubmission(
   return {
     id: row.id,
     createdAt: row.created_at,
-    data: normalizeAnswers(row.answers),
+    data: rowToFormData(row),
   };
 }
 
-function normalizeAnswers(
-  raw: Record<string, unknown> | null
-): Record<string, string | undefined> {
-  if (!raw || typeof raw !== "object") return {};
-  const out: Record<string, string | undefined> = {};
-  for (const [k, v] of Object.entries(raw)) {
-    out[k] = v == null ? "" : String(v);
-  }
-  return out;
+function rowToFormData(row: Row): Record<string, string | undefined> {
+  return {
+    firstName: row.first_name ?? "",
+    lastName: row.last_name ?? "",
+    email: row.email ?? "",
+    company: row.company ?? "",
+    jobTitle: row.job_title ?? "",
+    phone: row.phone ?? "",
+    interest: row.interest ?? "",
+    message: row.message ?? "",
+  };
 }
 
 export async function listSubmissions(): Promise<StoredSubmission[]> {
@@ -70,7 +90,7 @@ export async function listSubmissions(): Promise<StoredSubmission[]> {
   const supabase = getServiceClient();
   const { data, error } = await supabase
     .from(TABLE)
-    .select("id, created_at, answers")
+    .select("id, created_at, first_name, last_name, email, company, job_title, phone, interest, message")
     .order("created_at", { ascending: false })
     .limit(5000);
 
@@ -82,6 +102,6 @@ export async function listSubmissions(): Promise<StoredSubmission[]> {
   return rows.map((row) => ({
     id: row.id,
     createdAt: row.created_at,
-    data: normalizeAnswers(row.answers),
+    data: rowToFormData(row),
   }));
 }

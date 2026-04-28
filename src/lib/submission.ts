@@ -1,5 +1,5 @@
 export type StoredSubmission = {
-  id: string;
+  id: number;
   createdAt: string;
   data: Record<string, string | undefined>;
 };
