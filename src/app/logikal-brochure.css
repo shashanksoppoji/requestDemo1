@@ -1,0 +1,589 @@
+/* LogiKal brochure — from logikal_brochure_final.html, scoped to .logikal-brochure */
+:root {
+  --navy: #0a0f1e;
+  --navy-2: #111827;
+  --navy-3: #1a2235;
+  --navy-4: #232d42;
+  --green: #ec6335;
+  --green-dim: #c44e22;
+  --green-pale: rgba(236, 99, 53, 0.08);
+  --green-border: rgba(236, 99, 53, 0.2);
+  --white: #ffffff;
+  --white-2: rgba(255, 255, 255, 0.85);
+  --white-3: rgba(255, 255, 255, 0.5);
+  --white-4: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.08);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+.logikal-brochure *,
+.logikal-brochure *::before,
+.logikal-brochure *::after {
+  box-sizing: border-box;
+}
+
+.logikal-brochure {
+  font-family: "DM Sans", ui-sans-serif, sans-serif;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+}
+
+.logikal-brochure nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 15, 30, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 58px;
+}
+.logikal-brochure .nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "DM Mono", ui-monospace, monospace;
+  font-size: 13px;
+  color: var(--white-2);
+  letter-spacing: 0.02em;
+}
+.logikal-brochure .nav-logo-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: logikal-pulse 2.2s infinite;
+}
+@keyframes logikal-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(0.7);
+  }
+}
+.logikal-brochure .nav-cta {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 22px;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s;
+}
+.logikal-brochure .nav-cta:hover {
+  background: #f08060;
+  transform: translateY(-1px);
+}
+
+.logikal-brochure .hero {
+  background: var(--navy);
+  position: relative;
+  overflow: hidden;
+  padding: 5.5rem 2rem 4.5rem;
+  text-align: center;
+}
+.logikal-brochure .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      ellipse 70% 55% at 50% -10%,
+      rgba(236, 99, 53, 0.12) 0%,
+      transparent 65%
+    ),
+    radial-gradient(ellipse 50% 40% at 15% 90%, rgba(236, 99, 53, 0.05) 0%, transparent 55%);
+  pointer-events: none;
+}
+.logikal-brochure .hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 0%, black 0%, transparent 70%);
+}
+
+.logikal-brochure .hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green-pale);
+  border: 1px solid var(--green-border);
+  border-radius: 999px;
+  padding: 5px 16px;
+  font-size: 11px;
+  font-family: "DM Mono", monospace;
+  color: var(--green);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  position: relative;
+}
+.logikal-brochure .hero-eyebrow::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: logikal-pulse 2s infinite;
+}
+
+.logikal-brochure .hero h1 {
+  font-size: clamp(2.2rem, 5.5vw, 3.5rem);
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  margin-bottom: 1.25rem;
+  max-width: 660px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+.logikal-brochure .hero h1 strong {
+  font-weight: 500;
+  color: var(--green);
+}
+.logikal-brochure .hero-sub {
+  font-size: 16px;
+  color: var(--white-3);
+  max-width: 480px;
+  margin: 0 auto 2.75rem;
+  font-weight: 300;
+  line-height: 1.75;
+  position: relative;
+}
+.logikal-brochure .hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+.logikal-brochure .btn-primary {
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 13px 30px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, transform 0.1s;
+  display: inline-block;
+}
+.logikal-brochure .btn-primary:hover {
+  background: #f08060;
+  transform: translateY(-1px);
+}
+.logikal-brochure .btn-ghost {
+  background: transparent;
+  color: var(--white-3);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 13px 30px;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+  display: inline-block;
+}
+.logikal-brochure .btn-ghost:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: var(--white);
+}
+
+.logikal-brochure .stats-bar {
+  background: var(--navy-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.logikal-brochure .stat-item {
+  padding: 0.5rem 1rem;
+}
+.logikal-brochure .stat-item + .stat-item {
+  border-left: 1px solid var(--border);
+}
+.logikal-brochure .stat-num {
+  font-size: 2.25rem;
+  font-weight: 300;
+  color: var(--green);
+  letter-spacing: -0.03em;
+  font-family: "DM Mono", monospace;
+  display: block;
+}
+.logikal-brochure .stat-label {
+  font-size: 12px;
+  color: var(--white-3);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.logikal-brochure .section {
+  padding: 4.5rem 2rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
+.logikal-brochure .section-tag {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.logikal-brochure .section-tag::before {
+  content: "";
+  display: inline-block;
+  width: 20px;
+  height: 1px;
+  background: var(--green);
+  flex-shrink: 0;
+}
+.logikal-brochure .section h2 {
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 300;
+  letter-spacing: -0.025em;
+  color: var(--white);
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+}
+.logikal-brochure .section-body {
+  font-size: 15px;
+  color: var(--white-3);
+  max-width: 580px;
+  line-height: 1.8;
+  margin-bottom: 2.5rem;
+}
+
+.logikal-brochure .about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.logikal-brochure .about-card {
+  background: var(--navy-2);
+  padding: 1.5rem;
+  transition: background 0.2s;
+}
+.logikal-brochure .about-card:hover {
+  background: var(--navy-3);
+}
+.logikal-brochure .about-card-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--green-pale);
+  border: 1px solid var(--green-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.85rem;
+}
+.logikal-brochure .about-card h3 {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.01em;
+}
+.logikal-brochure .about-card p {
+  font-size: 13px;
+  color: var(--white-3);
+  line-height: 1.65;
+}
+
+.logikal-brochure .caps-bg {
+  background: var(--navy-2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.logikal-brochure .caps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+.logikal-brochure .cap-item {
+  background: var(--navy-2);
+  padding: 1.75rem;
+  transition: background 0.2s;
+  position: relative;
+}
+.logikal-brochure .cap-item:hover {
+  background: var(--navy-3);
+}
+.logikal-brochure .cap-item:hover .cap-accent {
+  opacity: 1;
+}
+.logikal-brochure .cap-accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--green);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.logikal-brochure .cap-num {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  margin-bottom: 0.85rem;
+  opacity: 0.7;
+}
+.logikal-brochure .cap-item h3 {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.logikal-brochure .cap-item p {
+  font-size: 13px;
+  color: var(--white-3);
+  line-height: 1.65;
+}
+
+.logikal-brochure .contact-wrap {
+  background: var(--navy);
+  border-top: 1px solid var(--border);
+  padding: 5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+.logikal-brochure .contact-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 50% 70% at 100% 50%,
+    rgba(236, 99, 53, 0.05) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+.logikal-brochure .contact-inner {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.logikal-brochure .form-card {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  margin-top: 2rem;
+}
+.logikal-brochure .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 500px) {
+  .logikal-brochure .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+.logikal-brochure .form-group {
+  margin-bottom: 14px;
+}
+.logikal-brochure .form-group label {
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--white-3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  font-family: "DM Mono", monospace;
+}
+.logikal-brochure .form-group input,
+.logikal-brochure .form-group select,
+.logikal-brochure .form-group textarea {
+  width: 100%;
+  background: var(--navy-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--white);
+  font-family: "DM Sans", sans-serif;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.logikal-brochure .form-group input::placeholder,
+.logikal-brochure .form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+.logikal-brochure .form-group input:focus,
+.logikal-brochure .form-group select:focus,
+.logikal-brochure .form-group textarea:focus {
+  border-color: var(--green-border);
+  background: var(--navy-4);
+  box-shadow: 0 0 0 3px rgba(236, 99, 53, 0.06);
+}
+.logikal-brochure .form-group select {
+  color: var(--white);
+  cursor: pointer;
+}
+.logikal-brochure .form-group select option {
+  background: var(--navy-2);
+  color: var(--white);
+}
+.logikal-brochure .form-group textarea {
+  resize: vertical;
+  min-height: 85px;
+}
+
+.logikal-brochure .submit-btn {
+  width: 100%;
+  padding: 13px;
+  background: var(--green);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "DM Sans", sans-serif;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: background 0.15s, transform 0.1s;
+  letter-spacing: 0.01em;
+}
+.logikal-brochure .submit-btn:hover:not(:disabled) {
+  background: #f08060;
+  transform: translateY(-1px);
+}
+.logikal-brochure .submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+.logikal-brochure .form-error {
+  color: #ff7c7c;
+  font-size: 12px;
+  margin-top: 8px;
+  font-family: "DM Mono", monospace;
+}
+
+.logikal-brochure .success-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  margin-top: 2rem;
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+.logikal-brochure .success-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--green-pale);
+  border: 1px solid var(--green-border);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.25rem;
+}
+.logikal-brochure .success-state h3 {
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+.logikal-brochure .success-state p {
+  color: var(--white-3);
+  font-size: 14px;
+}
+
+.logikal-brochure footer {
+  background: var(--navy-2);
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid var(--border);
+}
+.logikal-brochure footer p {
+  font-size: 12px;
+  color: var(--white-3);
+  font-family: "DM Mono", monospace;
+}
+.logikal-brochure footer a {
+  color: var(--green);
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+@keyframes logikal-fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.logikal-brochure .fade-up {
+  animation: logikal-fadeUp 0.6s ease both;
+}
+.logikal-brochure .d1 {
+  animation-delay: 0.1s;
+}
+.logikal-brochure .d2 {
+  animation-delay: 0.2s;
+}
+.logikal-brochure .d3 {
+  animation-delay: 0.3s;
+}
+
+@media (max-width: 600px) {
+  .logikal-brochure .stats-bar {
+    grid-template-columns: 1fr;
+  }
+  .logikal-brochure .stat-item + .stat-item {
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
+}
